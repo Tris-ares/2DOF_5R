@@ -16,4 +16,4 @@ As this is a work in progress, this is the current state :
 
 #Hardware :
 * The mechanical parts will be produced if I can find a 3D printer. Those parts have been quickly modelised using SolidWorks to give an overview of a possible mechanical implementation. Pictures can be found [here](http://imgur.com/a/QoGaD).
-* The electronics parts have not been thought much. It will most likely start with a python script prompting a user to write words then send the servo angles over UART to an Arduino, then a MSP430 will be considered to replace the arduino.
+* The electronic parts have not been given much thought. It will most likely start with a python script prompting a user to write words then send the servo angles over UART to an Arduino, then a MSP430 will be considered to replace the arduino.
