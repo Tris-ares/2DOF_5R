@@ -3,6 +3,28 @@
 
 from panto_basics import *
 
+########################################################################
+#
+#	Dictionnary of the letters and digits for the custom font made with
+#	 interpolations of lines, circles and ellipses for a pantograph 
+#		by Tris-Ares ( 114222688@umail.ucc.ie )
+#
+#		requires panto_basics.py
+#
+#		- letters  ( 26 latin majuscul letters )
+#		- digits
+#
+#		Given the origin coordinates (x0,y0) of the character,
+#		output 3 lists :
+#				- angle_left : all angles for the left arm to draw
+#					 the character
+#				-angle_right : all angles for the right arm to draw
+#					 the character
+#				- flag : if flag is 0 : the tip is up, otherwise the tip
+#					is down and writing.
+#				
+########################################################################
+
 # A
 def A(x0,y0):
 	angle_left=[]

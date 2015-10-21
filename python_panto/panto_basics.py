@@ -4,6 +4,30 @@
 from math import *
 import numpy as np
 
+########################################################################
+#
+#	Basic functions needed for a pantograph by Tris-Ares ( 114222688@umail.ucc.ie )
+#		- interpolation of a line
+#		- interpolation of a circle
+#		- interpolation of an ellipse
+#		- find the coordinates of the intersection between 2 circles
+#		- get angles for each arm of the pantograph
+#
+########################################################################
+
+
+########################################################################
+#
+#	interp_line : interpolates a line given its starting and ending points
+#
+#		parameters : - x_start,y_start : coordinates of the starting point
+#					- x_stop,y_stop : coordinates of the ending point
+#					- step : distance between the points
+#		output : lists of X coordinates and Y coordinates the end effector 
+#				must travel to in order to have the interpolation of the 
+#				given line.
+#
+########################################################################
 def interp_line( x_start,y_start,x_stop,y_stop,step):
 	
 	X=[] 
@@ -56,6 +80,21 @@ def interp_line( x_start,y_start,x_stop,y_stop,step):
 		
 	return (X,Y)
 
+########################################################################
+#
+#	interp_circ : interpolates a line given its starting and ending points
+#
+#		parameters : - x_0,y_0 : coordinates of the center point.
+#					- R : radius of the circle.
+#					- ang_start,ang_stop : starting and ending angles 
+#					(in degrees).
+#					- ang_step : interopolates a point every ang_step from
+#					and start to ang_stop.
+#		output : lists of X coordinates and Y coordinates the end effector 
+#				must travel to in order to have the interpolation of the 
+#				specified circle.
+#
+########################################################################
 def interp_circ( x0,y0,R,ang_start,ang_stop, ang_step ):
 	X=[] 
 	Y=[] 
@@ -84,7 +123,23 @@ def interp_circ( x0,y0,R,ang_start,ang_stop, ang_step ):
 		Y.append(round(R*sin(ang_stop*pi/180),2))
 		
 	return(X,Y)
-	   
+
+########################################################################
+#
+#	interp_circ : interpolates a line given its starting and ending points
+#
+#		parameters : - x_0,y_0 : coordinates of the center point.
+#					- R : radius of the circle.
+#					- a,b : half major and half minor radius respectively
+#					- ang_start,ang_stop : starting and ending angles 
+#					(in degrees).
+#					- ang_step : interopolates a point every ang_step from
+#					and start to ang_stop.
+#		output : lists of X coordinates and Y coordinates the end effector 
+#				must travel to in order to have the interpolation of the 
+#				specified ellipse.
+#
+########################################################################	   
 def interp_ellipse( x0,y0,a,b,ang_start,ang_stop,ang_step ):
 	
 	X=[] 
@@ -112,7 +167,20 @@ def interp_ellipse( x0,y0,a,b,ang_start,ang_stop,ang_step ):
 		Y.append(round(b*cos(ang_stop*pi/180),2))
 		
 	return(X,Y)
-	 
+	
+########################################################################
+#
+#	circles_intersec : find the two coordinates of the intersection of 
+#		two circles. Not tested if there is no intersection
+#	
+#	parameters : - x1,y1 : coordinates of the center of the first circle
+#				-R1 : radius of the 1st circle
+#				-x2,y2 : coordinates of the center of the second circle
+#				-R2 : radius of the 2nf circle
+#	output : coordinates of the two possible points of intersection between 
+#			the two circles.
+#
+########################################################################	 
 def circles_intersec(x1,y1,R1,x2,y2,R2 ):
 	
 	D=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)) 
@@ -134,6 +202,15 @@ def circles_intersec(x1,y1,R1,x2,y2,R2 ):
 
 	return (x_1,y_1,x_2,y_2)
 	   
+########################################################################
+#
+#	get_angles_robot : get the angles for the left and right arm of the 
+#			robot. The dimensions are now in this function, not as paramters.
+#
+#		parameters : x_end,y_end : coordinates of the end effector
+#		output : angle left and angle right for the left arm and the right one.
+#
+########################################################################
 	   
 def get_angles_robot( x_end,y_end):
 	
@@ -207,21 +284,3 @@ def get_angles_robot( x_end,y_end):
 	return(angle_left, angle_right) 
 
 	   
-if __name__ == "__main__":
-	
-	#(X1,Y1)=interp_circ(0,0,10,0,180,10)
-	#(X1,Y1)=interp_line(0,0,10,10,1)
-	#(X1,Y1)=interp_ellipse(0,0,1,2,0,180,10)
-	#(x1,y1,x2,y2)=circles_intersec(0,0,2,2,2,1)
-	#print(x1)
-	#print(y1)
-	#print(x2)
-	#print(y2)
-	
-	#print(X1)
-	#print(Y1)
-	#print(len(X1))
-	
-	(a1,a2)=get_angles_robot(0,0,1)
-	print(a1)
-	print(a2)
