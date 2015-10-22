@@ -8,7 +8,7 @@ The aim of this robot is to write and draw things. Indeed, the end effector is a
 As this is a work in progress, this is the current state :
 
 #Maths :
-* The inverse kinematics of the robot is done ( computing the servo angles knowing thedimensiosn of the robot and the wanted position of the end effector ). Intersections between circles are used to compute the angles of the servos.
+* The inverse kinematics of the robot is done ( computing the servo angles knowing the dimensions of the robot and the wanted position of the end effector ). [Intersections between circles are used to compute the angles of the servos](http://imgur.com/rYRsRPx).
 * In order to trace something ( a line for example ), one need to know the starting and ending coordinates of the line. However, if a constant delay is applied to draw lines of different lengths, it may result in a poor drawing and a lot of strain on the servos. That's why finding intermediates points between the starting and ending points ( interpolation ) is important : with a constant interpolation step, drawings are much smoother. 
 
 #Software :
