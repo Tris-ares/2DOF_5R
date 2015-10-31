@@ -5,6 +5,8 @@ The idea is to create a [pantograph](http://hades.mech.northwestern.edu/images/c
 
 The aim of this robot is to write and draw things. Indeed, the end effector is a writing tool ( pen, veleda marker ... ) and is translated across the writing surface ( paper or white board ) with two servomotors. First the robot will write letters/words typed by the user on a computer using a homemade font, then maybe some image recognition will be used to replicate the exact handwriting of a user using a camera. An example of such a system can be found [here](http://i.imgur.com/UJkJNk8.gifv). As a personnal project I try to not look at how it has been done by other people but rather come with my own design, understanding of things and solutions. I know that parts for this robot can be found on thingiverse, but I want to do everything on my own.
 
+This robot aim is to replicate what someone writes. When a HMI will be set up, the goal may shift to write what people write on twitter. I need to learn about twitter bots first though.
+
 As this is a work in progress, this is the current state :
 
 #Maths :
@@ -13,13 +15,18 @@ As this is a work in progress, this is the current state :
 
 #Software :
 * The font of all 26 latin letters, uppercase, as well as the 10 digits have been re-created using only lines, ellipses and circles. The position of the end effector has been mapped for all these fonts : it starts at coordinates (x0,y0), moves to the starting point of the character considered with its tip up, draws the letter with its tip in contact with the paper/white board using the coordinates of the interpolation points converted into angles for the servos ( and occasionally lift its tip to draw the letter in multiple times ) then goes back to (x0,y0). This is done in MATLAB ( with plot, see : video_1.m or this [youtube video](https://youtu.be/wZhavkFW-YY) ) and with Python ( no plot yet ). 
-* A size factor may be added. As of today characters are contained in a 10*20 mm rectangle centered on (x0,y0).
+* ~~A size factor may be added. As of today characters are contained in a 10*20 mm rectangle centered on (x0,y0).~~
+Size factor added and tested on all characters so far and will be implemented for future characters
+* Characters added : all 26 latin alphabet lettres lowercase, and typographical characters : ,.:!?()[]#=@&/\_-  ( forgot to do the "+" sign ).
 
 #Hardware :
 * The mechanical parts will be produced if I can find a 3D printer. Those parts have been quickly modelised using SolidWorks to give an overview of a possible mechanical implementation. Pictures can be found [here](http://imgur.com/a/QoGaD).
-* As of today, there is no mechanism to lift the tip of the end effector.
+* As of today, there is no mechanism to lift the tip of the end effector. Two possible solutions have been found though.
 * The electronic parts have not been given much thought. It will most likely start with a python script prompting a user to write words then send the servo angles over UART to an Arduino, then a MSP430 will be considered to replace the arduino.
 
 #What's next :
 * Determine relevant dimensions of the mechanical parts to allow the writing of multiple words.
-* Test size factor.
+* Add "+" character.
+* Modelise at least one solution to lift the tip of the end effector. 
+* Learn about twitter bots ?
+* HMI functions to implement in Python.
