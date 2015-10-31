@@ -281,6 +281,12 @@ def get_angles_robot( x_end,y_end):
 	
 	angle_right=round(acos(u_x*v_x+u_y*v_y)*180/pi,1)
 	
+	if (y_pivot_right+y_pivot_left)/2>=y_end:
+		print("error : singularity or past singularity")
+		error_out_of_bounds=True
+	else:
+		error_out_of_bounds=False
+	
 	return(angle_left, angle_right) 
 
 	   
