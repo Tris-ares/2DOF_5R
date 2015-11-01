@@ -17,7 +17,8 @@ As this is a work in progress, this is the current state :
 * The font of all 26 latin letters, uppercase, as well as the 10 digits have been re-created using only lines, ellipses and circles. The position of the end effector has been mapped for all these fonts : it starts at coordinates (x0,y0), moves to the starting point of the character considered with its tip up, draws the letter with its tip in contact with the paper/white board using the coordinates of the interpolation points converted into angles for the servos ( and occasionally lift its tip to draw the letter in multiple times ) then goes back to (x0,y0). This is done in MATLAB ( with plot, see : video_1.m or this [youtube video](https://youtu.be/wZhavkFW-YY) ) and with Python ( no plot yet ). 
 * ~~A size factor may be added. As of today characters are contained in a 10*20 mm rectangle centered on (x0,y0).~~
 Size factor added and tested on all characters so far and will be implemented for future characters
-* Characters added : all 26 latin alphabet lettres lowercase, and typographical characters : ,.:!?()[]#=@&/\_-  ( forgot to do the "+" sign ).
+* Characters added : all 26 latin alphabet lettres lowercase, and the following typographical characters : ,.:!?()[]#=@&/\_-+  ~~( forgot to do the "+" sign ).~~
+* Added security measuers to ward off singularities. In this case, there is a singularity when the two last links ( the closest to the end effector ) are colinear. In this configuration, the mechanism is blocked, and should it get unstuck, the end effector could go either up or down. Measures have been taken so that the end effctor doesn't reach the singularity point. Albeit not a singularity, the cases where the end effector is expected to go further than the mechanical parts allow it have been taken care of : should this case occure, the movements won't be taken into account until the end effector's position is back within the workspace.
 
 #Hardware :
 * The mechanical parts will be produced if I can find a 3D printer. Those parts have been quickly modelised using SolidWorks to give an overview of a possible mechanical implementation. Pictures can be found [here](http://imgur.com/a/QoGaD).
@@ -26,7 +27,7 @@ Size factor added and tested on all characters so far and will be implemented fo
 
 #What's next :
 * Determine relevant dimensions of the mechanical parts to allow the writing of multiple words.
-* Add "+" character.
+~~* Add "+" character.~~
 * Modelise at least one solution to lift the tip of the end effector. 
 * Learn about twitter bots ?
 * HMI functions to implement in Python.
