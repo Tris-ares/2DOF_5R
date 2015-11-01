@@ -214,6 +214,8 @@ def circles_intersec(x1,y1,R1,x2,y2,R2 ):
 	   
 def get_angles_robot( x_end,y_end):
 	
+	#robot dimensions
+	
 	a=12 
 	L=26 
 	l=20 
@@ -223,6 +225,7 @@ def get_angles_robot( x_end,y_end):
 
 	xa=-a/2 
 	xb=a/2 
+	
 
 	#get intersection coordinates for the left arm
 
@@ -281,12 +284,15 @@ def get_angles_robot( x_end,y_end):
 	
 	angle_right=round(acos(u_x*v_x+u_y*v_y)*180/pi,1)
 	
-	if (y_pivot_right+y_pivot_left)/2>=y_end:
+	# check for out of bounds end effector to ward off against singularities
+	
+	if (y_pivot_right+y_pivot_left)/2>=y_end or angle_right.imag !=0 or angle_left.imag != 0 :
 		print("error : singularity or past singularity")
 		error_out_of_bounds=True
 	else:
 		error_out_of_bounds=False
 	
-	return(angle_left, angle_right) 
+	
+	return(angle_left, angle_right,error_out_of_bounds) 
 
 	   

@@ -16,7 +16,7 @@ from panto_basics import *
 #		- lettres  ( 26 latin upperscale lettres )
 #		- digits
 #		- ,.:!?()[]#=@&/\_-
-#		- lettres	( 26 latin lowerscale lettres )
+#		- lettres  ( 26 latin lowerscale lettres )
 #
 #		Given the origin coordinates (x0,y0) and the scaling factor s 
 #		of the character, those functions
@@ -1797,6 +1797,9 @@ def Z(x0,y0,s):
 	return(angle_left,angle_right,flag)
 
 
+# digits 
+
+
 #N0
 def N0(x0,y0,s):
 	angle_left=[]
@@ -2405,12 +2408,16 @@ def N9(x0,y0,s):
 		
 	return(angle_left,angle_right,flag)
 	
+	
+	#typographical characters
+	
+# .	
 def p_point(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
 	flag=[]	
 	
-	[X0,Y0]=interp_line(x0,y0,x0-s*4.8,y0-s*9.5,4);
+	[X0,Y0]=interp_line(x0,y0,x0-s*4,y0-s*9.5,4);
 	for i in range(len(X0)):
 
 	[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
@@ -2422,7 +2429,7 @@ def p_point(x0,y0,s):
 		flag.append(0)
 		
 		
-	[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(x0-s*4.8,y0-s*9.5);
+	[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(x0-s*4,y0-s*9.5);
 	if error_out_of_bounds:
 		pass
 	else:
@@ -2431,7 +2438,7 @@ def p_point(x0,y0,s):
 		flag.append(1)
 	
 	
-	[X0,Y0]=interp_line(x0-s*4.8,y0-s*9.5,x0,y0,4);
+	[X0,Y0]=interp_line(x0-s*4,y0-s*9.5,x0,y0,4);
 	for i in range(len(X0)):
 		
 		[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
@@ -2444,6 +2451,48 @@ def p_point(x0,y0,s):
 
 	return(angle_left,angle_right,flag)
 
+# ,
+def p_comma(x0,y0,s):
+	angle_left=[]
+	angle_right=[]
+	flag=[]	
+	
+	[X0,Y0]=interp_line(x0,y0,x0-s*3,y0-s*9,4);
+	for i in range(len(X0)):
+		
+		[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
+		if error_out_of_bounds:
+			pass
+		else:
+		    angle_left.append(angle_l)
+		    angle_right.append(angle_r)
+		    flag.append(0)
+
+	[X1,Y1]=interp_line(x0-s*3,y0-s*9,x0-s*4,y0-s*10,1)
+	for i in range(len(X1)):
+		
+	    [angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X1[i],Y1[i]);
+	    if error_out_of_bounds:
+			pass
+    	else:
+	        angle_left.append(angle_l)
+	        angle_right.append(angle_r)
+	        flag.append(1)
+	   
+	[X0,Y0]=interp_line(x0-s*4,y0-s*10,x0,y0,4);
+	for i in range(len(X0)):
+		
+		[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
+		if error_out_of_bounds:
+			pass
+		else:
+		    angle_left.append(angle_l)
+		    angle_right.append(angle_r)
+		    flag.append(0)
+
+	return(angle_left,angle_right,flag)
+
+# :	
 def p_2_point(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2500,6 +2549,7 @@ def p_2_point(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)		    
 
+# ?
 def p_interro(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2614,7 +2664,7 @@ def p_interro(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)		
 	
-	    
+# !	    
 def p_excla(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2674,7 +2724,7 @@ def p_excla(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# /
 def p_slash(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2715,6 +2765,7 @@ def p_slash(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
+# \
 def p_a_slash(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2755,7 +2806,7 @@ def p_a_slash(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# _
 def p_underscore(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2796,6 +2847,7 @@ def p_underscore(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
+# -
 def p_dash(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2836,7 +2888,7 @@ def p_dash(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# '
 def p_quote(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2877,6 +2929,7 @@ def p_quote(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
+# #
 def p_diese(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -2983,7 +3036,7 @@ def p_diese(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# (#
 def p_o_parenth(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3024,7 +3077,7 @@ def p_o_parenth(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# )#
 def p_c_parenth(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3065,7 +3118,7 @@ def p_c_parenth(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# [
 def p_o_bracket(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3128,7 +3181,7 @@ def p_o_bracket(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# ]
 def p_c_bracket(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3191,7 +3244,7 @@ def p_c_bracket(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# =
 def p_equal(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3254,7 +3307,62 @@ def p_equal(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
+# +
+def p_plus(x0,y0,s):
+	angle_left=[]
+	angle_right=[]
+	flag=[]
 	
+	[X0,Y0]=interp_line(x0,y0,x0,y0+s*4,4);
+	for i in range(len(X0)):
+		
+		[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
+		if error_out_of_bounds:
+			pass
+		else:
+		    angle_left.append(angle_l)
+		    angle_right.append(angle_r)
+		    flag.append(0)
+		
+	[X1,Y1]=interp_line(x0,y0+s*4,x0,y0-s*4,2)
+
+	[X0,Y0]=interp_line(x0,y0-s*4,x0-s*4,y0,4);
+	for i in range(len(X0)):
+		
+		[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
+		if error_out_of_bounds:
+			pass
+		else:
+		    angle_left.append(angle_l)
+		    angle_right.append(angle_r)
+		    flag.append(0)
+		
+	[X2,Y2]=interp_line(x0-s*4,y0,x0+s*4,y0,2);
+	for i in range(len(X2)):
+		
+	    [angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X2[i],Y2[i]);
+	    if error_out_of_bounds:
+			pass
+    	else:
+	        angle_left.append(angle_l)
+	        angle_right.append(angle_r)
+	        flag.append(1)
+	        
+
+	[X0,Y0]=interp_line(x0+s*4,y0,x0,y0,4);
+	for i in range(len(X0)):
+		
+		[angle_l,angle_r,error_out_of_bounds]=get_angles_robot(X0[i],Y0[i]);
+		if error_out_of_bounds:
+			pass
+		else:
+		    angle_left.append(angle_l)
+		    angle_right.append(angle_r)
+		    flag.append(0)
+		    
+	return(angle_left,angle_right,flag)
+
+# <		
 def p_smaller(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3306,6 +3414,7 @@ def p_smaller(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
+# >
 def p_greater(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3357,7 +3466,7 @@ def p_greater(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# @
 def p_at(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3442,6 +3551,7 @@ def p_at(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
+# °
 def p_deg(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3482,7 +3592,7 @@ def p_deg(x0,y0,s):
 		    
 	return(angle_left,angle_right,flag)
 
-
+# &
 def p_and(x0,y0,s):
 	angle_left=[]
 	angle_right=[]
@@ -3555,6 +3665,8 @@ def p_and(x0,y0,s):
 		    flag.append(0)
 		    
 	return(angle_left,angle_right,flag)
+
+
 
 # lower case lettres
 
