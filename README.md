@@ -13,7 +13,7 @@ As this is a work in progress, this is the current state :
 * The inverse kinematics of the robot is done ( computing the servo angles knowing the dimensions of the robot and the wanted position of the end effector ). [Intersections between circles are used to compute the angles of the servos](http://imgur.com/rYRsRPx).
 * In order to trace something, a line for example, one need to know the starting and ending coordinates of the line. However, if a constant delay is applied to draw lines of different lengths, it may result in a poor drawing and a lot of strain on the servos. That's why finding intermediates points between the starting and ending points ( interpolation ) is important : with a constant interpolation step, drawings are much smoother. 
 
-####Workspace study :
+#####Workspace study :
 The workspace is the defined by the area in which the end effector can be in. It is limited by singularities and the physical dimensions of the robot. These dimensions are :
 
 * The distance a between the center of the two servos outputs.
@@ -21,7 +21,7 @@ The workspace is the defined by the area in which the end effector can be in. It
 * The length l of the second link of the kinematic chain, the one attached to the end effector (in blue/green [here](http://i.imgur.com/A3rcZ1F.jpg)).
 
 
-Thanks to a [quick workspace study](http://imgur.com/a/1bJ1g), it would seem that a relatively small a distance, with l greater than L is a good combination to have a workspace large enough to write a small text ( a tweet for exemple uses no more than 140 characters ).
+Thanks to a [quick workspace study](http://imgur.com/a/1bJ1g), it would seem that a relatively small a distance, with l equal or greater than L is a good combination to have a workspace large enough to write a small text ( a tweet for exemple uses no more than 140 characters ).
 
 
 ##Software :
