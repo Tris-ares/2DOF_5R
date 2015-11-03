@@ -1,9 +1,13 @@
 function [ angle_left,angle_right,error ] = get_angles_robot2( x_end,y_end)
 %return angle left and right in degrees
 
-a=12;
-L=26;
-l=20;
+% a=12;
+% L=26;
+% l=20;
+
+a=40;
+L=100;
+l=125;
 
 ya=-35;
 yb=-35;
@@ -41,8 +45,7 @@ end
         % using dot product : vector_u.vector_v=||u||*||v||*cos(angle_between_u_and_v)
         
         angle_left=acos(u_x*v_x+u_y*v_y)*180/pi;
-
-    
+        
 %get intersection corrdniates for the right arm
 
 [x_1,y_1,x_2,y_2]=circles_intersec(x_end,y_end,l,xb,yb,L);
@@ -68,16 +71,18 @@ end
         % using dot product : vector_u.vector_v=||u||*||v||*cos(angle_between_u_and_v)
         
         angle_right=acos(u_x*v_x+u_y*v_y)*180/pi;
-
-%test singularity
-if (y_pivot_left+y_pivot_right)/2>=y_end || imag(angle_left) ~= 0 || imag(angle_right) ~= 0
-%disp('singularity !')
-error=1;
-disp('error singularity !')
-else 
-    disp('ok')
-    error=0;
     
+        
+%test singularity
+dist_check_1=round(sqrt((x_pivot_left-x_end)*(x_pivot_left-x_end)+(y_pivot_left-y_end)*(y_pivot_left-y_end))*10)/10;
+dist_check_2=round(sqrt((x_pivot_right-x_end)*(x_pivot_right-x_end)+(y_pivot_right-y_end)*(y_pivot_right-y_end))*10)/10;
+
+if (imag(y_pivot_left+y_pivot_right)/2)~=0 ||(y_pivot_left+y_pivot_right)/2>=y_end || imag(angle_left) ~= 0 || imag(angle_right) ~= 0 || dist_check_1 ~= l || dist_check_2 ~= l 
+error=1;
+%disp('error singularity !')
+else 
+    %disp('ok')
+    error=0;  
 end
 
 end

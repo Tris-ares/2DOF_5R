@@ -15,7 +15,7 @@ clc;
 % xb=a/2;
 
 a=40;
-L=50;
+L=80;
 l=100;
 
 ya=-35;
@@ -36,9 +36,9 @@ hold on;
 scatter(xb,yb,100,'ko','filled')
 
 ymax=200;
-xmax=220;
+xmax=200;
 
-for x=0:1:xmax
+for x=0:2:xmax
     for y=-35:1:ymax
         
        %get intersection coordinates for the left arm
@@ -101,7 +101,12 @@ for x=0:1:xmax
                                     angle_right=acos(u_x*v_x+u_y*v_y)*180/pi;
 
                             %test singularity
-                            if (y_pivot_left+y_pivot_right)/2>=y_end || imag(angle_left) ~= 0 || imag(angle_right) ~= 0
+                            
+                            dist_check_1=round(abs(sqrt((x_pivot_left-x_end)*(x_pivot_left-x_end)+(y_pivot_left-y_end)*(y_pivot_left-y_end)))*100)/100; %round to the 2nd decimal
+                            dist_check_2=round(abs(sqrt((x_pivot_right-x_end)*(x_pivot_right-x_end)+(y_pivot_right-y_end)*(y_pivot_right-y_end)))*100)/100;
+                            
+                            if (imag(y_pivot_left+y_pivot_right)/2)~=0 ||(y_pivot_left+y_pivot_right)/2>=y_end || imag(angle_left) ~= 0 || imag(angle_right) ~= 0 || dist_check_1 ~= l || dist_check_2 ~= l 
+
                             %disp('singularity !')
                             error=1;
                             %disp('error singularity !')
@@ -110,7 +115,7 @@ for x=0:1:xmax
                                 error=0;
 
                             end
-     
+                          
         if error
             scatter(x,y,'r*');
             
@@ -123,12 +128,12 @@ for x=0:1:xmax
 end;
 
 plot([5,5],[-35,ymax],'k','lineWidth',2)
-for j=1:1:21
+for j=1:1:20
 plot([5+10*j,5+10*j],[-35,ymax],'k','lineWidth',2)
 end
-start_y=14;
+start_y=-16;
 plot([0,xmax],[start_y,start_y],'k','lineWidth',2)
-for i=1:1:8
+for i=1:1:10
     plot([0,xmax],[start_y+20*i,start_y+20*i],'k','lineWidth',2)
 end
 plot([0,xmax],[start_y-20,start_y-20],'k','lineWidth',2)
